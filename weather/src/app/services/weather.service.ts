@@ -1,9 +1,11 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, concat, from, Observable, of} from 'rxjs';
 import {HttpClient, HttpErrorResponse, HttpParams} from '@angular/common/http';
-import { CurrentWeather, CurrentWeatherShow, ForecastWeather, ForecastWeatherShow } from '../models/weather';
 import { concatMap, map } from 'rxjs/operators';
-@Injectable()
+import { CurrentWeather, CurrentWeatherShow, ForecastWeather, ForecastWeatherShow } from '../models/weather';
+@Injectable({
+  providedIn: 'root'
+})
 export class WeatherDataService {
   private readonly CURRENT_URL = 'http://api.weatherapi.com/v1/current.json?key=5b7157072f9c4ba28af110053252705&q=Jakarta&aqi=yes';
   private readonly FORECAST_URL = 'http://api.weatherapi.com/v1/forecast.json?key=5b7157072f9c4ba28af110053252705&q=Jakarta&days=7&aqi=yes&alerts=no';

@@ -1,0 +1,186 @@
+<div class="form">
+        <mat-form-field color="accent">
+          
+          <input matInput #input class="form-control" placeholder="City name" name="city_name" [(ngModel)]="city_name">
+          
+        </mat-form-field>
+      </div><button matButton [disabled]="loading" mat-button (click)="currentweather()"><span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>get current weather</button>
+<div *ngIf="error" class="alert alert-danger">City not found</div>
+<div *ngIf="success" class="alert alert-success">City added</div>
+
+<div class="container mat-elevation-z8">
+  
+    <div class="form">
+      <mat-form-field floatPlaceholder="never" color="accent">
+        <input matInput #filtercurrent placeholder="Filter city">
+      </mat-form-field>
+    </div>
+  
+    <mat-table #table [dataSource]="dataSourceCurrent" matSort class="mat-cell" class="table table-striped table-hover">
+      <!--ng update @angular/cli @angular/core-->
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+  
+      <!-- ID Column -->
+       <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
+        <mat-cell *matCellDef="let row" >{{row.id}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+        <mat-cell *matCellDef="let row" >{{row.name}}</mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="temperature">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Current Temprature</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.temperature}}</mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="weather_condition">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Weather Condition</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.weather_condition}} <img [src]=row.icon  /> </mat-cell>
+      </ng-container>
+  
+      <!-- actions -->
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef>
+          Delete
+        </mat-header-cell>
+  
+        <mat-cell *matCellDef="let row; let i=index;">
+  
+          <button matIconButton  color="accent" [class.row-is-coloured]="i%2==0" (click)="delete(row)">
+            <mat-icon aria-hidden="false" aria-label="Example delete icon">delete</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="displayedColumnsCurrent"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumnsCurrent; let i = index;" [class.row-is-coloured]="i%2==0"></mat-row>
+    </mat-table>
+  
+  
+    <div class="no-results" [style.display]="dataSourceCurrent?.renderedData.length == 0 ? '' : 'none'">
+      No results
+    </div>
+  
+    <mat-paginator #paginatorcurrent
+                   [length]="dataSourceCurrent?.filteredData.length"
+                   [pageIndex]="0"
+                   [pageSize]="10"
+                   [pageSizeOptions]="[5, 10, 25, 100]">
+    </mat-paginator>
+  </div>
+
+  <div class="container mat-elevation-z8">
+  
+    <div class="form">
+      <mat-form-field floatPlaceholder="never" color="accent">
+        <input matInput #filterforecast placeholder="Filter city">
+      </mat-form-field>
+    </div>
+  
+    <mat-table #table [dataSource]="dataSourceForecast" matSort class="mat-cell" class="table table-striped table-hover">
+      <!--ng update @angular/cli @angular/core-->
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+  
+      <!-- ID Column -->
+       <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
+        <mat-cell *matCellDef="let row" >{{row.id}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+        <mat-cell *matCellDef="let row" >{{row.name}}</mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="temperature_1">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Temp {{addDays(this.current_date, 1)}}</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.temperature_1}}</mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="weather_condition_1">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Weather {{addDays(this.current_date,1)}}</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.weather_condition_1}}<img [src]=row.icon_1  /> </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="temperature_2">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Temp {{addDays(this.current_date,2)}}</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.temperature_2}}</mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="weather_condition_2">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Weather {{addDays(this.current_date,2)}}</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.weather_condition_2}}<img [src]=row.icon_2  /> </mat-cell>
+      </ng-container>
+
+      <!-- <ng-container matColumnDef="temperature_3">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Temp {{addDays(this.current_date,3)}}</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.temperature_3}}</mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="weather_condition_3">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Weather {{addDays(this.current_date,3)}}</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.weather_condition_3}}<img [src]=row.icon_3  /> </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="temperature_4">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Temp {{addDays(this.current_date,4)}}</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.temperature_4}}</mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="weather_condition_4">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Weather {{addDays(this.current_date,4)}}</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.weather_condition_4}}<img [src]=row.icon_4  /> </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="temperature_5">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Temp {{addDays(this.current_date,5)}}</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.temperature_5}}</mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="weather_condition_5">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Weather {{addDays(this.current_date,5)}}</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.weather_condition_5}}<img [src]=row.icon_5  /> </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="temperature_6">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Temp {{addDays(this.current_date,6)}}</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.temperature_6}}</mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="weather_condition_6">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Weather {{addDays(this.current_date,6)}}</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.weather_condition_6}}<img [src]=row.icon_6  /> </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="temperature_7">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Temp {{addDays(this.current_date,7)}}</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.temperature_7}}</mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="weather_condition_7">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Weather {{addDays(this.current_date,7)}}</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.weather_condition_7}}<img [src]=row.icon_7  /> </mat-cell>
+      </ng-container> -->
+  
+      <!-- actions -->
+     
+  
+      <mat-header-row *matHeaderRowDef="displayedColumnsForecast"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumnsForecast; let i = index;" [class.row-is-coloured]="i%2==0"></mat-row>
+    </mat-table>
+  
+  
+    <div class="no-results" [style.display]="dataSourceForecast?.renderedData.length == 0 ? '' : 'none'">
+      No results
+    </div>
+  
+    <mat-paginator #paginatorforecast
+                   [length]="dataSourceForecast?.filteredData.length"
+                   [pageIndex]="0"
+                   [pageSize]="10"
+                   [pageSizeOptions]="[5, 10, 25, 100]">
+    </mat-paginator>
+  </div>

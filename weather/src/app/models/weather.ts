@@ -25,21 +25,21 @@ export class ForecastWeatherShow {
         this.temperature_2 = forecastweather.forecast.forecastday[2].day.avgtemp_c;
         this.weather_condition_2 = forecastweather.forecast.forecastday[2].day.condition.text;
         this.icon_2 = forecastweather.forecast.forecastday[2].day.condition.icon;
-        this.temperature_3 = forecastweather.forecast.forecastday[3].day.avgtemp_c;
-        this.weather_condition_3 = forecastweather.forecast.forecastday[3].day.condition.text;
-        this.icon_3 = forecastweather.forecast.forecastday[3].day.condition.icon;
-        this.temperature_4 = forecastweather.forecast.forecastday[4].day.avgtemp_c;
-        this.weather_condition_4 = forecastweather.forecast.forecastday[4].day.condition.text;
-        this.icon_4 = forecastweather.forecast.forecastday[4].day.condition.icon;
-        this.temperature_5 = forecastweather.forecast.forecastday[5].day.avgtemp_c;
-        this.weather_condition_5 = forecastweather.forecast.forecastday[5].day.condition.text;
-        this.icon_5 = forecastweather.forecast.forecastday[5].day.condition.icon;
-        this.temperature_6 = forecastweather.forecast.forecastday[6].day.avgtemp_c;
-        this.weather_condition_6 = forecastweather.forecast.forecastday[6].day.condition.text;
-        this.icon_6 = forecastweather.forecast.forecastday[6].day.condition.icon;
-        this.temperature_7 = forecastweather.forecast.forecastday[7].day.avgtemp_c;
-        this.weather_condition_7 = forecastweather.forecast.forecastday[7].day.condition.text;
-        this.icon_7 = forecastweather.forecast.forecastday[7].day.condition.icon;
+        // this.temperature_3 = forecastweather.forecast.forecastday[3].day.avgtemp_c;
+        // this.weather_condition_3 = forecastweather.forecast.forecastday[3].day.condition.text;
+        // this.icon_3 = forecastweather.forecast.forecastday[3].day.condition.icon;
+        // this.temperature_4 = forecastweather.forecast.forecastday[4].day.avgtemp_c;
+        // this.weather_condition_4 = forecastweather.forecast.forecastday[4].day.condition.text;
+        // this.icon_4 = forecastweather.forecast.forecastday[4].day.condition.icon;
+        // this.temperature_5 = forecastweather.forecast.forecastday[5].day.avgtemp_c;
+        // this.weather_condition_5 = forecastweather.forecast.forecastday[5].day.condition.text;
+        // this.icon_5 = forecastweather.forecast.forecastday[5].day.condition.icon;
+        // this.temperature_6 = forecastweather.forecast.forecastday[6].day.avgtemp_c;
+        // this.weather_condition_6 = forecastweather.forecast.forecastday[6].day.condition.text;
+        // this.icon_6 = forecastweather.forecast.forecastday[6].day.condition.icon;
+        // this.temperature_7 = forecastweather.forecast.forecastday[7].day.avgtemp_c;
+        // this.weather_condition_7 = forecastweather.forecast.forecastday[7].day.condition.text;
+        // this.icon_7 = forecastweather.forecast.forecastday[7].day.condition.icon;
     }
     id: number
     name: string
@@ -49,21 +49,21 @@ export class ForecastWeatherShow {
     temperature_2: number
     weather_condition_2: string
     icon_2:string
-    temperature_3: number
-    weather_condition_3: string
-    icon_3:string
-    temperature_4: number
-    weather_condition_4: string
-    icon_4:string
-    temperature_5: number
-    weather_condition_5: string
-    icon_5:string
-    temperature_6: number
-    weather_condition_6: string
-    icon_6:string
-    temperature_7: number
-    weather_condition_7: string
-    icon_7:string
+    // temperature_3: number
+    // weather_condition_3: string
+    // icon_3:string
+    // temperature_4: number
+    // weather_condition_4: string
+    // icon_4:string
+    // temperature_5: number
+    // weather_condition_5: string
+    // icon_5:string
+    // temperature_6: number
+    // weather_condition_6: string
+    // icon_6:string
+    // temperature_7: number
+    // weather_condition_7: string
+    // icon_7:string
 }
 
 export interface CurrentWeather {
