@@ -1,10 +1,16 @@
 {
+  "routes": [
+    {
+      "route": "/",
+      "redirect": "/weather"
+    },
+    {
+      "route": "/index.html",
+      "redirect": "/weather"
+    }
+  ],
   "navigationFallback": {
-    "rewrite": "/index.html",
-    "exclude": [
-      "/weather/*.js",
-      "/weather/*.css",
-      "/assets/*"
-    ]
+    "rewrite": "/weather/index.html",
+    "exclude": ["/static/*", "/images/*", "/css/*", "/js/*"]
   }
 }
