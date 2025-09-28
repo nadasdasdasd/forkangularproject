@@ -55,6 +55,10 @@ module.exports = {
     })
   ],
   devServer: {
+    static: './dist',
+    devMiddleware: {
+      writeToDisk: true,
+    },
     client: {
       overlay: {
         errors: true,
