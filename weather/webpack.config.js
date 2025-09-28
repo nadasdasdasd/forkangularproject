@@ -73,7 +73,7 @@ module.exports = {
     port: 4900,
     open: true
   },
-  devtool: 'inline-source-map',
+  devtool: 'source-map',
   watchOptions: {
     poll: 2000,
     aggregateTimeout: 300,
