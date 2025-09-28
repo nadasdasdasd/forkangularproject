@@ -2,12 +2,12 @@
   "$schema": "https://raw.githubusercontent.com/Azure/static-web-apps-cli/main/schema/swa-cli.config.schema.json",
   "configurations": {
     "app": {
-      "context": "http://localhost:5000",
-      "run": "npm start",
-      "apiLocation": "",
-      "outputLocation": "dist",
-      "devserverTimeout": 10000,
-      "open": "true"
+      "context": ".",                    // Root folder proyek (atau sesuaikan jika app di subfolder)
+      "run": "npm run build",           // Perintah build yang menghasilkan output produksi
+      "outputLocation": "dist",         // Folder hasil build yang di-deploy
+      "apiLocation": "",                // Kosong jika tidak ada API di proyek ini
+      "devserverTimeout": 10000,        // Timeout connection dev server waktu local dev (tidak perlu untuk produksi)
+      "open": false                    // tidak perlu auto buka browser untuk deploy produksi
     }
   }
 }
