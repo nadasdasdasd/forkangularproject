@@ -28,8 +28,10 @@ jobs:
         with:
           node-version: "22"
       - name: Install dependencies
+        working-directory: ./weather
         run: npm ci
       - name: Build Angular App
+        working-directory: ./weather
         run: npm run build -- --output-path=dist
       - name: Build And Deploy
         id: builddeploy
@@ -40,7 +42,7 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_GENTLE_DUNE_0DEC77900 }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: upload
-          app_location: /
+          app_location: /weather
           api_location: api
           output_location: dist
   close_pull_request_job:
